@@ -79,4 +79,19 @@
         </field>
     </record>
 
+    <record id="car_repair_form_view_search" model="ir.ui.view">
+        <field name="name">car.search.view</field>
+        <field name="model">car.repair</field>
+        <field name="arch" type="xml">
+            <search string="search">
+                <filter string="very urgent" name="tag_ids" domain="[('tag_ids','=','very urgent')]"/>
+                <filter string="Urgent" name="tag_ids" domain="[('tag_ids','=','urgent')]"></filter>
+
+                <group string="group By">
+                    <filter string="urgency" name="tag_ids" context="{'group_by':'tag_ids'}"/>
+                
+                </group>
+            </search>
+        </field>
+    </record>
 </odoo>
