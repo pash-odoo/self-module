@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+car_repair_service.access_car_repair,access_car_repair,car_repair_service.model_car_repair,base.group_user,1,1,1,1
+car_repair_service.access_car_company,access_car_company,car_repair_service.model_car_company,base.group_user,1,1,1,1
+car_repair_service.access_car_service_tag,access_car_service_tag,car_repair_service.model_car_service_tag,base.group_user,1,1,1,1
+car_repair_service.access_employee,access_employee,car_repair_service.model_employee,base.group_user,1,1,1,1
+car_repair_service.access_service,access_service,car_repair_service.model_service,base.group_user,1,1,1,1

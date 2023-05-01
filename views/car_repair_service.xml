@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="car_repair_action_service" model="ir.actions.act_window">
+        <field name="name">Service</field>
+        <field name="res_model">service</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- tree view -->
+    <record id="car_repair_service_tree_view" model="ir.ui.view">
+        <field name="name">car.service.tree.view</field>
+        <field name="model">service</field>
+        <field name="arch" type="xml">
+            <tree string="List">
+                <field name="name" string="Name of Service"/>
+                <field name="price" string="Price"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

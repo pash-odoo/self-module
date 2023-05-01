@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="car_repair_root" name="Car Repair Service">
+
+        <menuitem id="car_repair_appointment" name="Appointment">
+            <menuitem id="car_repair_menu_action" action="car_repair_appointment_action"/>
+        </menuitem>
+
+        <menuitem id="car_repair_configuration" name="Configuration">
+            <menuitem id="car_repair_menu_tags" action="car_repair_action_tag"/>
+            <menuitem id="car_repair_menu_services" action="car_repair_action_service"/>
+            <menuitem id="car_repair_menu_company" action="car_repair_action_company"/>
+        </menuitem>
+    
+    </menuitem>
+</odoo>

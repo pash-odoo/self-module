@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="car_repair_appointment_action" model="ir.actions.act_window">
+        <field name="name">Appointment</field>
+        <field name="res_model">car.repair</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Tree/list view for appointment page -->
+    <record id="car_reapir_list_view" model="ir.ui.view">
+        <field name="name">car.repair.tree</field>
+        <field name="model">car.repair</field>
+        <field name="arch" type="xml">
+            <tree string="List">
+                <field name="name" string="Title" />
+                <field name="customer_name" string="Customer Name" />
+                <field name="customer_phone" string="Customer Phone" />
+                <field name="customer_email" string="Customer Email" />
+                <field name="expected_date" string="Deadline" />
+                <field name="employee_name" string="Employee Name" />
+            </tree>
+        </field>
+    </record>
+    
+
+    <!-- form view for appointment page-->
+    <record id="car_repair_form_view" model="ir.ui.view">
+        <field name="name">car.repair.form</field>
+        <field name="model">car.repair</field>
+        <field name="arch" type="xml">
+            <form string="form">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <h1><field name="name" string="Name" /></h1>
+                    <group>
+                    
+                        <field name="tag_ids" widget="many2many_tags" />
+                        <group>
+                            <field name="customer_name" string="Customer Name"/>
+                            <field name="customer_phone" string="Customer Phone" />
+                            <field name="customer_email" string="Customer Email"/>
+                        </group>
+                        <group>
+                            <field name="expected_date" string="Deadline" />
+                            <field name="cost" string="Cost" />
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Notes">
+                            <field name="notes"/>
+                        </page>
+                        <page string="Vehicle Details">
+                            <group>
+                                <field name="car_company" string="Company"/>
+                                <field name="car_name" string="Model Name"/>
+                                <field name="vehicle_number" string="Registration number"/>
+                            </group>
+                        </page>
+
+                        <page string="Service">
+                            <field name="service_ids" string="services"/>
+                        </page>
+
+
+                        <page string="Mechanic">
+                            <group>
+                                <field name="employee_name" string="Name"/>
+                                <field name="employee_email" string="Email"/>
+                                <field name="employee_phone" string="Phone"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>
