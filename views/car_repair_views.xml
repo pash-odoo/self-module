@@ -37,14 +37,16 @@
                     <h1><field name="name" string="Name" /></h1>
                     <group>
                     
-                        <field name="tag_ids" widget="many2many_tags" />
                         <group>
+                            <!-- <field name="tag_ids" widget="many2many_tags" string="Urgency" /> -->
+                            <field name="tag_ids" string="Urgency" />
                             <field name="customer_name" string="Customer Name"/>
                             <field name="customer_phone" string="Customer Phone" />
                             <field name="customer_email" string="Customer Email"/>
                         </group>
                         <group>
                             <field name="expected_date" string="Deadline" />
+                            <field name="remaining_days" string="Remaining Days" />
                             <field name="cost" string="Cost" />
                         </group>
                     </group>
@@ -84,6 +86,9 @@
         <field name="model">car.repair</field>
         <field name="arch" type="xml">
             <search string="search">
+
+                <field name="name" string="Title" />
+                <field name="employee_name" string="Employee" />
                 <filter string="very urgent" name="tag_ids" domain="[('tag_ids','=','very urgent')]"/>
                 <filter string="Urgent" name="tag_ids" domain="[('tag_ids','=','urgent')]"></filter>
 
@@ -91,6 +96,7 @@
                     <filter string="urgency" name="tag_ids" context="{'group_by':'tag_ids'}"/>
                 
                 </group>
+                
             </search>
         </field>
     </record>

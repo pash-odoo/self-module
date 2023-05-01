@@ -1,4 +1,5 @@
 from odoo import fields,models,api
+from datetime import datetime,date
 
 class CarRepair(models.Model):
     _name="car.repair"
@@ -12,6 +13,7 @@ class CarRepair(models.Model):
 
     #compute field
     cost=fields.Float(string="Expected Cost",compute="_compute_cost")
+    remaining_days=fields.Integer(string="Remaining Days",compute="_compute_days")
     
     #customer and car Details
     customer_name=fields.Char(required=True,string="Customer Name")
@@ -22,6 +24,7 @@ class CarRepair(models.Model):
 
     #many2one
     car_company=fields.Many2one("car.company",string="company")
+    tag_ids = fields.Many2one("car.service.tag",string="tags")
 
     #worker detail
     employee_name=fields.Many2one("res.users")
@@ -29,7 +32,6 @@ class CarRepair(models.Model):
     employee_phone=fields.Char(related="employee_name.phone",string="Mechanic Phone")
 
     #many2many
-    tag_ids = fields.Many2many("car.service.tag",string="tags")
     service_ids=fields.Many2many("service",string="Service")
 
     state=fields.Selection(
@@ -40,9 +42,22 @@ class CarRepair(models.Model):
     )
     
 
-    @api.depends("service_ids.price")
+    @api.depends("service_ids.price","tag_ids.name")
     def _compute_cost(self):
         if(self and self.mapped("service_ids.price")):
-            self.cost=sum(self.mapped("service_ids.price"))
+            if self.tag_ids.name=='very urgent':
+                self.cost=sum(self.mapped("service_ids.price"))+1000
+            elif self.tag_ids.name=='urgent':
+                self.cost=sum(self.mapped("service_ids.price"))+500
+            else:
+                self.cost=sum(self.mapped("service_ids.price"))
+
         else:
             self.cost=0
+
+    @api.depends("expected_date")
+    def _compute_days(self):
+        if(self and self.expected_date):
+            self.remaining_days=(self.expected_date-date.today()).days
+        else:
+            self.remaining_days=0
