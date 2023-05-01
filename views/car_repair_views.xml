@@ -17,8 +17,9 @@
                 <field name="customer_name" string="Customer Name" />
                 <field name="customer_phone" string="Customer Phone" />
                 <field name="customer_email" string="Customer Email" />
-                <field name="expected_date" string="Deadline" />
                 <field name="employee_name" string="Employee Name" />
+                <field name="tag_ids" string="Urgency"/>
+                <field name="expected_date" string="Deadline" />
             </tree>
         </field>
     </record>
