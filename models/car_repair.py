@@ -1,5 +1,6 @@
 from odoo import fields,models,api
 from datetime import datetime,date
+from odoo.exceptions import UserError,ValidationError
 
 class CarRepair(models.Model):
     _name="car.repair"
@@ -45,12 +46,7 @@ class CarRepair(models.Model):
     @api.depends("service_ids.price","tag_ids.name")
     def _compute_cost(self):
         if(self and self.mapped("service_ids.price")):
-            if self.tag_ids.name=='very urgent':
-                self.cost=sum(self.mapped("service_ids.price"))+1000
-            elif self.tag_ids.name=='urgent':
-                self.cost=sum(self.mapped("service_ids.price"))+500
-            else:
-                self.cost=sum(self.mapped("service_ids.price"))
+            self.cost=sum(self.mapped("service_ids.price"))+self.tag_ids.price
 
         else:
             self.cost=0
@@ -61,3 +57,30 @@ class CarRepair(models.Model):
             self.remaining_days=(self.expected_date-date.today()).days
         else:
             self.remaining_days=0
+
+    #button
+
+    def cancel_appointment(self):
+        if (self.state not in ['work Started','done']) and (self.expected_date-date.today()).days>1:
+            self.state='canceled'
+        else:
+            raise UserError("You Can not cancel appointment if work is done or repair going on or delivery date is less then 2 days")
+
+    
+
+    @api.constrains('expected_date')
+    def _check_date(self):
+        if self.expected_date< date.today():
+            raise ValidationError("Please select valid date!")
+
+    @api.constrains('customer_phone')
+    def _check_phone_number(self):
+        if len(self.customer_phone)!=10:
+            raise ValidationError('please Enter Valid Phone Number')
+
+    @api.constrains('service_ids')
+    def _check_service_select(self):
+        if not self.service_ids:
+            raise ValidationError('please select atleast one services')
+
+

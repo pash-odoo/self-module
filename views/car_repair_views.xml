@@ -33,6 +33,7 @@
             <form string="form">
                 <header>
                     <field name="state" widget="statusbar"/>
+                    <button name="cancel_appointment" type="object" string="Cancel Appointment"/>
                 </header>
                 <sheet>
                     <h1><field name="name" string="Name" /></h1>
@@ -55,6 +56,7 @@
                     <notebook>
                         <page string="Notes">
                             <field name="notes"/>
+                            <!-- <field name="state" string="Progress"/> -->
                         </page>
                         <page string="Vehicle Details">
                             <group>
@@ -90,8 +92,8 @@
 
                 <field name="name" string="Title" />
                 <field name="employee_name" string="Employee" />
-                <filter string="very urgent" name="tag_ids" domain="[('tag_ids','=','very urgent')]"/>
-                <filter string="Urgent" name="tag_ids" domain="[('tag_ids','=','urgent')]"></filter>
+                <filter string="very urgent" name="tag_ids" domain="[('tag_ids','=','very urgent (Extra 1000/- Charge)')]"/>
+                <filter string="Urgent" name="tag_ids" domain="[('tag_ids','=','urgent (Extra 500/- Charge)')]"></filter>
 
                 <group string="group By">
                     <filter string="urgency" name="tag_ids" context="{'group_by':'tag_ids'}"/>

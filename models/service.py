@@ -6,4 +6,6 @@ class Service(models.Model):
 
     name=fields.Char()
     price=fields.Float()
+
+    _sql_constraints=[('check_service_name','unique(name)','please enter unique service name'),('check_price_service','check(price>0)','Please make price more than 0')]
     
