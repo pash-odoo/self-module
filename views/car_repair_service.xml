@@ -11,8 +11,8 @@
         <field name="name">car.service.tree.view</field>
         <field name="model">service</field>
         <field name="arch" type="xml">
-            <tree string="List">
-                <field name="name" string="Name of Service"/>
+            <tree string="List" editable="top">
+                <field name="name" string="Name of Service" />
                 <field name="price" string="Price"/>
             </tree>
         </field>

@@ -4,6 +4,7 @@
         <field name="name">Appointment</field>
         <field name="res_model">car.repair</field>
         <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_state':True}</field>
     </record>
 
 
@@ -12,14 +13,16 @@
         <field name="name">car.repair.tree</field>
         <field name="model">car.repair</field>
         <field name="arch" type="xml">
-            <tree string="List">
+            <tree string="List" decoration-warning="remaining_days&lt;2" decoration-bf="remaining_days&lt;1" decoration-success="state=='done'" decoration-danger="state=='canceled'">
                 <field name="name" string="Title" />
                 <field name="customer_name" string="Customer Name" />
                 <field name="customer_phone" string="Customer Phone" />
                 <field name="customer_email" string="Customer Email" />
                 <field name="employee_name" string="Employee Name" />
                 <field name="tag_ids" string="Urgency"/>
+                <field name="remaining_days" string="Remaining Days" optional="hidden"/>
                 <field name="expected_date" string="Deadline" />
+                <field name="state" optional="hidden"/>
             </tree>
         </field>
     </record>
@@ -33,7 +36,8 @@
             <form string="form">
                 <header>
                     <field name="state" widget="statusbar"/>
-                    <button name="cancel_appointment" type="object" string="Cancel Appointment"/>
+                    <button name="cancel_appointment" type="object" string="Cancel Appointment" attrs="{'invisible':[('state','in',['work Started','done','canceled'])]}"/>
+                    <button name="done_appointment" type="object" string="Work Completed" attrs="{'invisible':[('state','in',['done','canceled'])]}"/>
                 </header>
                 <sheet>
                     <h1><field name="name" string="Name" /></h1>
@@ -41,7 +45,7 @@
                     
                         <group>
                             <!-- <field name="tag_ids" widget="many2many_tags" string="Urgency" /> -->
-                            <field name="tag_ids" string="Urgency" />
+                            <field name="tag_ids" string="Urgency" options="{'no_create':True} "/>
                             <field name="customer_name" string="Customer Name"/>
                             <field name="customer_phone" string="Customer Phone" />
                             <field name="customer_email" string="Customer Email"/>
@@ -50,13 +54,14 @@
                             <field name="expected_date" string="Deadline" />
                             <field name="remaining_days" string="Remaining Days" />
                             <field name="cost" string="Cost" />
+                            <field name="tag_description" string="Extra Charges"/>
                         </group>
                     </group>
 
                     <notebook>
                         <page string="Notes">
                             <field name="notes"/>
-                            <!-- <field name="state" string="Progress"/> -->
+                            <field name="state" string="Progress"/>
                         </page>
                         <page string="Vehicle Details">
                             <group>
@@ -67,7 +72,7 @@
                         </page>
 
                         <page string="Service">
-                            <field name="service_ids" string="services"/>
+                            <field name="service_ids" string="services" attrs="{'readonly':[('state','in',['done','canceled'])]}"/>
                         </page>
 
 
@@ -92,8 +97,9 @@
 
                 <field name="name" string="Title" />
                 <field name="employee_name" string="Employee" />
-                <filter string="very urgent" name="tag_ids" domain="[('tag_ids','=','very urgent (Extra 1000/- Charge)')]"/>
-                <filter string="Urgent" name="tag_ids" domain="[('tag_ids','=','urgent (Extra 500/- Charge)')]"></filter>
+                <filter string="very urgent" name="tag_ids" domain="[('tag_ids','=','very urgent')]"/>
+                <filter string="Urgent" name="tag_ids" domain="[('tag_ids','=','urgent')]"></filter>
+                <filter string="Pending" name="state" domain="[('state','not in',['done','canceled'])]"/>
 
                 <group string="group By">
                     <filter string="urgency" name="tag_ids" context="{'group_by':'tag_ids'}"/>

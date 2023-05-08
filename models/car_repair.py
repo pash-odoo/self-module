@@ -5,6 +5,7 @@ from odoo.exceptions import UserError,ValidationError
 class CarRepair(models.Model):
     _name="car.repair"
     _description="data related to car repair appointment"
+    _order="expected_date"
 
     name=fields.Char(required=True,string="Name")
     notes=fields.Text()
@@ -41,6 +42,8 @@ class CarRepair(models.Model):
         copy=False,
         default='new'
     )
+
+    tag_description=fields.Char(compute="_find_description")
     
 
     @api.depends("service_ids.price","tag_ids.name")
@@ -53,10 +56,24 @@ class CarRepair(models.Model):
 
     @api.depends("expected_date")
     def _compute_days(self):
-        if(self and self.expected_date):
-            self.remaining_days=(self.expected_date-date.today()).days
+        # if(self and self.expected_date):
+        #     self.remaining_days=(self.expected_date-date.today()).days
+        # else:
+        #     self.remaining_days=0
+        for record in self:
+            if record and record.expected_date:
+                record.remaining_days=(record.expected_date-date.today()).days
+            else:
+                record.remaining_days=0
+
+    
+    # compute value for finding desciption of tags
+    @api.depends("tag_ids.description")
+    def _find_description(self):
+        if self and self.tag_ids.name:
+            self.tag_description=self.tag_ids.description
         else:
-            self.remaining_days=0
+            self.tag_description=""
 
     #button
 
@@ -65,6 +82,9 @@ class CarRepair(models.Model):
             self.state='canceled'
         else:
             raise UserError("You Can not cancel appointment if work is done or repair going on or delivery date is less then 2 days")
+        
+    def done_appointment(self):
+        self.state='done'
 
     
 
@@ -75,7 +95,7 @@ class CarRepair(models.Model):
 
     @api.constrains('customer_phone')
     def _check_phone_number(self):
-        if len(self.customer_phone)!=10:
+        if len(self.customer_phone)!=10 or not self.customer_phone.isnumeric():
             raise ValidationError('please Enter Valid Phone Number')
 
     @api.constrains('service_ids')

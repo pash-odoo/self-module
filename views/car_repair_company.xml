@@ -5,4 +5,14 @@
         <field name="res_model">car.company</field>
         <field name="view_mode">tree,form</field>
     </record>
+
+    <record id="car_repair_action_company_tree" model="ir.ui.view">
+        <field name="name">car.company.tree</field>
+        <field name="model">car.company</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
 </odoo>
