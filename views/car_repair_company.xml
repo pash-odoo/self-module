@@ -10,9 +10,34 @@
         <field name="name">car.company.tree</field>
         <field name="model">car.company</field>
         <field name="arch" type="xml">
-            <tree editable="top">
-                <field name="name"/>
+            <tree>
+                <field name="name" />
             </tree>
+        </field>
+    </record>
+
+    <record id="car_repair_company_form_view" model="ir.ui.view">
+        <field name="name">car.company.form</field>
+        <field name="model">car.company</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(car_repair_appointment_action)d" type="action"
+                            class="oe_stat_button" icon="fa-money" context="{'search_default_state':0,'search_default_car_company': 1}">
+                            <div class="o_stat_info">
+                                    <field name="appointment_count" class="o_stat_value"></field>
+                                <span class="o_stat_text">Count</span>
+                            </div>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name" string="Name"/>
+                    </group>
+                        
+                </sheet>
+            </form>
+
         </field>
     </record>
 </odoo>

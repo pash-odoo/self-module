@@ -36,6 +36,7 @@
             <form string="form">
                 <header>
                     <field name="state" widget="statusbar"/>
+                    <button name="start_appointment" type="object" string="start work" attrs="{'invisible':[('state','not in',['new'])]}" class="oe_highlight"/>
                     <button name="cancel_appointment" type="object" string="Cancel Appointment" attrs="{'invisible':[('state','in',['work Started','done','canceled'])]}"/>
                     <button name="done_appointment" type="object" string="Work Completed" attrs="{'invisible':[('state','in',['done','canceled'])]}"/>
                 </header>
@@ -97,9 +98,10 @@
 
                 <field name="name" string="Title" />
                 <field name="employee_name" string="Employee" />
-                <filter string="very urgent" name="tag_ids" domain="[('tag_ids','=','very urgent')]"/>
+                <filter string="very urgent" name="tag_isearch_default_stateds" domain="[('tag_ids','=','very urgent')]"/>
                 <filter string="Urgent" name="tag_ids" domain="[('tag_ids','=','urgent')]"></filter>
                 <filter string="Pending" name="state" domain="[('state','not in',['done','canceled'])]"/>
+                <filter string="company" name="car_company" domain="[('car_company','=',active_id)]"/>
 
                 <group string="group By">
                     <filter string="urgency" name="tag_ids" context="{'group_by':'tag_ids'}"/>

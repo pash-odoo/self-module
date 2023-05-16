@@ -85,6 +85,9 @@ class CarRepair(models.Model):
         
     def done_appointment(self):
         self.state='done'
+    
+    def start_appointment(self):
+        self.state='work Started'
 
     
 
@@ -102,5 +105,13 @@ class CarRepair(models.Model):
     def _check_service_select(self):
         if not self.service_ids:
             raise ValidationError('please select atleast one services')
+
+    
+    # on delete (python inheritance)
+    @api.ondelete(at_uninstall=False)
+    def _unlink_if_state(self):
+        for record in self:
+            if record.state not in ['new','canceled']:
+                raise UserError("Appointment can not be deleted if work is started or done!")
 
 

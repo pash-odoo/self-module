@@ -10,7 +10,7 @@
         <field name="name">tag.tree</field>
         <field name="model">car.service.tag</field>
         <field name="arch" type="xml">
-            <tree string="List" editable="top">
+            <tree string="List">
                 <field name="name" string="Name"/>
                 <field name="description" string="Description"/>
                 <field name="price" string="Price"/>
