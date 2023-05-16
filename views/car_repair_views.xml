@@ -13,7 +13,7 @@
         <field name="name">car.repair.tree</field>
         <field name="model">car.repair</field>
         <field name="arch" type="xml">
-            <tree string="List" decoration-warning="remaining_days&lt;2" decoration-bf="remaining_days&lt;1" decoration-success="state=='done'" decoration-danger="state=='canceled'">
+            <tree string="List" decoration-warning="remaining_days&lt;2 and state!='done'" decoration-bf="remaining_days&lt;1 and state!='done'" decoration-success="state=='done'" decoration-danger="state=='canceled'">
                 <field name="name" string="Title" />
                 <field name="customer_name" string="Customer Name" />
                 <field name="customer_phone" string="Customer Phone" />
@@ -72,7 +72,7 @@
                         </page>
 
                         <page string="Service">
-                            <field name="service_ids" string="services" attrs="{'readonly':[('state','in',['done','canceled'])]}"/>
+                            <field name="service_ids" string="services" attrs="{'readonly':[('state','in',['done','canceled'])]}" options="{'no_quick_create':True}"/>
                         </page>
 
 
