@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
 
+    <!-- tag -->
+    <record id="repair_demo_data7" model="car.service.tag">
+        <field name="name">urgent</field>
+        <field name="price">1000</field>
+        <field name="description">Extra 500/-</field>
+    </record>
+
+    <record id="repair_demo_data8" model="car.service.tag">
+        <field name="name">not urgent</field>
+        <field name="price">0</field>
+        <field name="description">No Extra charge</field>
+    </record>
     <!-- car repair model demo data -->
     <record id="repair_demo_data1" model="car.repair">
         <field name="name">Demo 1</field>
@@ -12,6 +24,8 @@
         <field name="car_name">Breza</field>
         <field name="vehicle_number">GJ06AC3680</field>
         <field name="state">new</field>
+        <field name="tag_ids" ref="repair_demo_data7"/>
+
     </record>
 
     <record id="repair_demo_data2" model="car.repair">
@@ -24,6 +38,7 @@
         <field name="car_name">fortuner</field>
         <field name="vehicle_number">GJ03AC3214</field>
         <field name="state">new</field>
+        <field name="tag_ids" ref="repair_demo_data8"/>
     </record>
 
     <!-- car company -->
@@ -46,17 +61,5 @@
         <field name="price">500</field>
     </record>
 
-    <!-- tag -->
-    <record id="repair_demo_data7" model="car.service.tag">
-        <field name="name">urgent</field>
-        <field name="price">1000</field>
-        <field name="description">Extra 500/-</field>
-    </record>
-
-    <record id="repair_demo_data8" model="car.service.tag">
-        <field name="name">not urgent</field>
-        <field name="price">0</field>
-        <field name="description">No Extra charge</field>
-    </record>
 
 </odoo>

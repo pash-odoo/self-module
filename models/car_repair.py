@@ -88,7 +88,6 @@ class CarRepair(models.Model):
     
     def start_appointment(self):
         self.state='work Started'
-
     
 
     @api.constrains('expected_date')

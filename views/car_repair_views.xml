@@ -4,6 +4,7 @@
         <field name="name">Appointment</field>
         <field name="res_model">car.repair</field>
         <field name="view_mode">tree,form</field>
+        <!-- <field name="context"></field> -->
         <field name="context">{'search_default_state':True}</field>
     </record>
 
@@ -98,10 +99,10 @@
 
                 <field name="name" string="Title" />
                 <field name="employee_name" string="Employee" />
-                <filter string="very urgent" name="tag_isearch_default_stateds" domain="[('tag_ids','=','very urgent')]"/>
+                <filter string="very urgent" name="tag_ids" domain="[('tag_ids','=','very urgent')]"/>
                 <filter string="Urgent" name="tag_ids" domain="[('tag_ids','=','urgent')]"></filter>
                 <filter string="Pending" name="state" domain="[('state','not in',['done','canceled'])]"/>
-                <filter string="company" name="car_company" domain="[('car_company','=',active_id)]"/>
+                <!-- <filter string="company" name="car_company" domain="[('car_company','=',active_id)]"/> -->
 
                 <group string="group By">
                     <filter string="urgency" name="tag_ids" context="{'group_by':'tag_ids'}"/>

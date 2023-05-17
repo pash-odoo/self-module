@@ -14,3 +14,15 @@ class CarCompany(models.Model):
     @api.depends('appointment')
     def _compute_count_appointment(self):
         self.appointment_count=len(self.appointment)
+
+
+    #to apply filter of car company by stat button
+    def action_open_company_appointment(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': ('appointment'),
+            'res_model': 'car.repair',
+            'view_type': 'list',
+            'view_mode': 'list',
+            'domain': [('id', 'in', self.appointment.ids)],
+        }

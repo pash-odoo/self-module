@@ -23,8 +23,8 @@
             <form>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button name="%(car_repair_appointment_action)d" type="action"
-                            class="oe_stat_button" icon="fa-money" context="{'search_default_state':0,'search_default_car_company': 1}">
+                        <button name="action_open_company_appointment" type="object"
+                            class="oe_stat_button" icon="fa-money">
                             <div class="o_stat_info">
                                     <field name="appointment_count" class="o_stat_value"></field>
                                 <span class="o_stat_text">Count</span>
