@@ -30,7 +30,7 @@
                             <field name="name" string="Name"/>
                             <field name="description" string="Description"/>
                         </group>
-                        <group>
+                        <group name="group1">
                             <field name="price" string="Price"/>
                         </group>
                     </group>

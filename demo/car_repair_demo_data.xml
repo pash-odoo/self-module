@@ -2,17 +2,40 @@
 <odoo>
 
     <!-- tag -->
-    <record id="repair_demo_data7" model="car.service.tag">
+    <record id="repair_service_tag_demo_data" model="car.service.tag">
         <field name="name">urgent</field>
         <field name="price">1000</field>
         <field name="description">Extra 500/-</field>
     </record>
 
-    <record id="repair_demo_data8" model="car.service.tag">
+    <record id="repair_service_tag2_demo_data" model="car.service.tag">
         <field name="name">not urgent</field>
         <field name="price">0</field>
         <field name="description">No Extra charge</field>
     </record>
+
+
+
+    <!-- car company -->
+    <record id="repair_service_company_demo_data" model="car.company">
+        <field name="name">suzuki</field>
+    </record>
+    <record id="repair_service_company2_demo_data" model="car.company">
+        <field name="name">Toyota</field>
+    </record>
+
+    <!-- car service -->
+
+    <record id="repair_service_demo_data" model="service">
+        <field name="name">oil change</field>
+        <field name="price">1000</field>
+    </record>
+
+    <record id="repair_service2_demo_data" model="service">
+        <field name="name">wash</field>
+        <field name="price">500</field>
+    </record>
+
     <!-- car repair model demo data -->
     <record id="repair_demo_data1" model="car.repair">
         <field name="name">Demo 1</field>
@@ -24,7 +47,10 @@
         <field name="car_name">Breza</field>
         <field name="vehicle_number">GJ06AC3680</field>
         <field name="state">new</field>
-        <field name="tag_ids" ref="repair_demo_data7"/>
+        <field name="tag_ids" ref="repair_service_tag_demo_data"/>
+        <field name="car_company" ref="repair_service_company_demo_data"/>
+        <field name="service_ids" eval="[(6,0,[ref('repair_service_demo_data')])]"/>
+        <field name="employee_name" ref="base.user_demo"/>
 
     </record>
 
@@ -36,29 +62,12 @@
         <field name="customer_phone">7654321098</field>
         <field name="customer_email">efg@test.com</field>
         <field name="car_name">fortuner</field>
+        <field name="car_company" ref="repair_service_company2_demo_data"/>
         <field name="vehicle_number">GJ03AC3214</field>
         <field name="state">new</field>
-        <field name="tag_ids" ref="repair_demo_data8"/>
-    </record>
-
-    <!-- car company -->
-    <record id="repair_demo_data3" model="car.company">
-        <field name="name">suzuki</field>
-    </record>
-    <record id="repair_demo_data4" model="car.company">
-        <field name="name">Toyota</field>
-    </record>
-
-    <!-- car service -->
-
-    <record id="repair_demo_data5" model="service">
-        <field name="name">oil change</field>
-        <field name="price">1000</field>
-    </record>
-
-    <record id="repair_demo_data6" model="service">
-        <field name="name">wash</field>
-        <field name="price">500</field>
+        <field name="tag_ids" ref="repair_service_tag2_demo_data"/>
+        <field name="service_ids" eval="[(6,0,[ref('repair_service_demo_data'),ref('repair_service2_demo_data')])]"/>
+        <field name="employee_name" ref="base.user_admin"/>
     </record>
 
 

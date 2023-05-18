@@ -11,6 +11,7 @@
         'views/car_repair_company.xml',
         'views/car_repair_tag.xml',
         'views/car_repair_service.xml',
+        'views/res_user.xml',
         'views/car_repair_menus.xml',
     ],
     'demo':[

@@ -82,7 +82,7 @@
                             <group>
                                 <field name="employee_name" string="Name"/>
                                 <field name="employee_email" string="Email"/>
-                                <field name="employee_phone" string="Phone"/>
+                                <field name="employee_phone" widget="phone" string="Phone"/>
                             </group>
                         </page>
                     </notebook>
