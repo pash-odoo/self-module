@@ -1,7 +1,7 @@
 {
     'name':'Car Repair Service',
     'version':'1.0',
-    'depends':['base'],
+    'depends':['base','mail'],
     'auther':'Shubh Patel (Pash)',
     'category': 'Repair Service/Car Repair Service',
     'description':"""This module is related to Car Repair Service.""",

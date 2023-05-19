@@ -17,7 +17,7 @@
             <tree string="List" decoration-warning="remaining_days&lt;2 and state!='done'" decoration-bf="remaining_days&lt;1 and state!='done'" decoration-success="state=='done'" decoration-danger="state=='canceled'">
                 <field name="name" string="Title" />
                 <field name="customer_name" string="Customer Name" />
-                <field name="customer_phone" string="Customer Phone" />
+                <field name="customer_phone" string="Customer Phone"/>
                 <field name="customer_email" string="Customer Email" />
                 <field name="employee_name" string="Employee Name" />
                 <field name="tag_ids" string="Urgency"/>
@@ -87,6 +87,12 @@
                         </page>
                     </notebook>
                 </sheet>
+
+                <div class="oe_chatter">
+                   <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                    <field name="activity_ids" />
+                </div>
             </form>
         </field>
     </record>

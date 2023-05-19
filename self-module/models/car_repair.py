@@ -6,21 +6,26 @@ class CarRepair(models.Model):
     _name="car.repair"
     _description="data related to car repair appointment"
     _order="expected_date"
+    _inherit = ['mail.thread','mail.activity.mixin']
 
-    name=fields.Char(required=True,string="Name")
+    name=fields.Char(required=True,string="Name",tracking=True)
     notes=fields.Text()
 
 
-    expected_date=fields.Date(copy=False,string="Expected Date")
+    expected_date=fields.Date(copy=False,string="Expected Date",tracking=True)
 
     #compute field
     cost=fields.Float(string="Expected Cost",compute="_compute_cost")
     remaining_days=fields.Integer(string="Remaining Days",compute="_compute_days")
     
     #customer and car Details
-    customer_name=fields.Char(required=True,string="Customer Name")
-    customer_phone=fields.Char(required=True,string="Customer Phone")
-    customer_email=fields.Char(string="Customer Email")
+    # customer_name=fields.Char(required=True,string="Customer Name")
+    # customer_phone=fields.Char(required=True,string="Customer Phone")
+    # customer_email=fields.Char(string="Customer Email")
+
+    customer_name=fields.Many2one("res.partner",required=True,string="Customer Name")
+    customer_phone=fields.Char(related="customer_name.phone",string="Customer Phone")
+    customer_email=fields.Char(related="customer_name.email",string="Customer Email")
     car_name = fields.Char(string="Car Name")
     vehicle_number=fields.Char(required=True,string="Vehicle Number")
 
@@ -40,7 +45,8 @@ class CarRepair(models.Model):
         string="state",
         selection=[('new','New'),('work Started','Work Started'),('done','Done'),('canceled','Canceled')],
         copy=False,
-        default='new'
+        default='new',
+        tracking=True
     )
 
     tag_description=fields.Char(compute="_find_description")

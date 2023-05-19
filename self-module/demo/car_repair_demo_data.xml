@@ -4,14 +4,20 @@
     <!-- tag -->
     <record id="repair_service_tag_demo_data" model="car.service.tag">
         <field name="name">urgent</field>
-        <field name="price">1000</field>
-        <field name="description">Extra 500/-</field>
+        <field name="price">500</field>
+        <field name="description">Extra 500/- Charge For Urgent delivery</field>
     </record>
 
     <record id="repair_service_tag2_demo_data" model="car.service.tag">
         <field name="name">not urgent</field>
         <field name="price">0</field>
-        <field name="description">No Extra charge</field>
+        <field name="description">No Extra Charge for Normal Delivery</field>
+    </record>
+
+    <record id="repair_service_tag3_demo_data" model="car.service.tag">
+        <field name="name">very urgent</field>
+        <field name="price">1000</field>
+        <field name="description">Extra 1000/- Charge for Very Urgent Delivery</field>
     </record>
 
 
@@ -23,8 +29,34 @@
     <record id="repair_service_company2_demo_data" model="car.company">
         <field name="name">Toyota</field>
     </record>
+    <record id="repair_service_company3_demo_data" model="car.company">
+        <field name="name">Tata</field>
+    </record>
+    <record id="repair_service_company4_demo_data" model="car.company">
+        <field name="name">Ford</field>
+    </record>
+    <record id="repair_service_company5_demo_data" model="car.company">
+        <field name="name">Tesla</field>
+    </record>
+    <record id="repair_service_company6_demo_data" model="car.company">
+        <field name="name">Mercedes</field>
+    </record>
+    <record id="repair_service_company7_demo_data" model="car.company">
+        <field name="name">Mahindra</field>
+    </record>
+    <record id="repair_service_company8_demo_data" model="car.company">
+        <field name="name">skoda</field>
+    </record>
+    <record id="repair_service_company9_demo_data" model="car.company">
+        <field name="name">Nissan</field>
+    </record>
+    <record id="repair_service_company10_demo_data" model="car.company">
+        <field name="name">BMW</field>
+    </record>
+    
 
     <!-- car service -->
+
 
     <record id="repair_service_demo_data" model="service">
         <field name="name">oil change</field>
@@ -32,18 +64,56 @@
     </record>
 
     <record id="repair_service2_demo_data" model="service">
-        <field name="name">wash</field>
+        <field name="name">car washing</field>
         <field name="price">500</field>
     </record>
+
+    <record id="repair_service3_demo_data" model="service">
+        <field name="name">Air checking and filling</field>
+        <field name="price">100</field>
+    </record>
+    <record id="repair_service4_demo_data" model="service">
+        <field name="name">Break checking and repairing</field>
+        <field name="price">500</field>
+    </record>
+    <record id="repair_service5_demo_data" model="service">
+        <field name="name">Wheel Alignment</field>
+        <field name="price">1000</field>
+    </record>
+    <record id="repair_service6_demo_data" model="service">
+        <field name="name">Engine service</field>
+        <field name="price">1500</field>
+    </record>
+    <record id="repair_service7_demo_data" model="service">
+        <field name="name">Lights changing</field>
+        <field name="price">1000</field>
+    </record>
+    <record id="repair_service8_demo_data" model="service">
+        <field name="name">Steering</field>
+        <field name="price">5000</field>
+    </record>
+    <record id="repair_service9_demo_data" model="service">
+        <field name="name">Suspension</field>
+        <field name="price">1000</field>
+    </record>
+    <record id="repair_service10_demo_data" model="service">
+        <field name="name">Fuel tank checking</field>
+        <field name="price">1000</field>
+    </record>
+    <record id="repair_service11_demo_data" model="service">
+        <field name="name">Combo Offer (Air checking and filling, car washing,Break checking and repairing)</field>
+        <field name="price">1000</field>
+    </record>
+
 
     <!-- car repair model demo data -->
     <record id="repair_demo_data1" model="car.repair">
         <field name="name">Demo 1</field>
         <field name="notes">car engine oil change</field>
         <field name="expected_date">2023-05-19</field>
-        <field name="customer_name">Hello</field>
-        <field name="customer_phone">8765432109</field>
-        <field name="customer_email">def@test.com</field>
+        <field name="customer_name" ref="base.res_partner_2"></field>
+        <!-- <field name="customer_phone">8765432109</field>
+        <field name="customer_email">def@test.com</field> -->
         <field name="car_name">Breza</field>
         <field name="vehicle_number">GJ06AC3680</field>
         <field name="state">new</field>
@@ -58,9 +128,9 @@
         <field name="name">Demo 2</field>
         <field name="notes">Car Wash</field>
         <field name="expected_date">2023-05-20</field>
-        <field name="customer_name">world</field>
-        <field name="customer_phone">7654321098</field>
-        <field name="customer_email">efg@test.com</field>
+        <field name="customer_name" ref="base.res_partner_2"></field>
+        <!-- <field name="customer_phone">7654321098</field>
+        <field name="customer_email">efg@test.com</field> -->
         <field name="car_name">fortuner</field>
         <field name="car_company" ref="repair_service_company2_demo_data"/>
         <field name="vehicle_number">GJ03AC3214</field>
