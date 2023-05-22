@@ -12,7 +12,7 @@ class CarRepair(models.Model):
     notes=fields.Text()
 
 
-    expected_date=fields.Date(copy=False,string="Expected Date",tracking=True)
+    expected_date=fields.Date(copy=False,string="Expected Date",tracking=True,required=True)
 
     #compute field
     cost=fields.Float(string="Expected Cost",compute="_compute_cost")
@@ -31,7 +31,7 @@ class CarRepair(models.Model):
 
     #many2one
     car_company=fields.Many2one("car.company",string="company")
-    tag_ids = fields.Many2one("car.service.tag",string="tags")
+    tag_ids = fields.Many2one("car.service.tag",string="tags",required=True)
 
     #worker detail
     employee_name=fields.Many2one("res.users")
