@@ -54,18 +54,15 @@ class CarRepair(models.Model):
 
     @api.depends("service_ids.price","tag_ids.name")
     def _compute_cost(self):
-        if(self and self.mapped("service_ids.price")):
-            self.cost=sum(self.mapped("service_ids.price"))+self.tag_ids.price
+        for record in self:
+            if record.service_ids:
+                record.cost=sum(record.mapped("service_ids.price"))+record.tag_ids.price
+            else:
+                record.cost=0
 
-        else:
-            self.cost=0
 
     @api.depends("expected_date")
     def _compute_days(self):
-        # if(self and self.expected_date):
-        #     self.remaining_days=(self.expected_date-date.today()).days
-        # else:
-        #     self.remaining_days=0
         for record in self:
             if record and record.expected_date:
                 record.remaining_days=(record.expected_date-date.today()).days

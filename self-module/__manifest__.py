@@ -7,6 +7,8 @@
     'description':"""This module is related to Car Repair Service.""",
     'data':[
         'security/ir.model.access.csv',
+        'report/car_repair_report.xml',
+        'report/car_repair_templates.xml',
         'views/car_repair_views.xml',
         'views/car_repair_company.xml',
         'views/car_repair_tag.xml',
